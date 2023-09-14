@@ -1,10 +1,9 @@
+import Animation1 from './animation1'
+
 export default function Page() {
 	return (
-		<main className='flex min-h-screen flex-col items-center justify-center'>
-			<a target='_blank' href='https://nextjs.org/' className='font-medium text-sky-500 hover:underline'>
-				Link
-			</a>
-			CPU
+		<main className='flex min-h-screen flex-col items-center justify-center gap-4 bg-[#fefefe]'>
+			<Animation1 />
 		</main>
 	)
 }
