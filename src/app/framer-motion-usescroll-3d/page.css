@@ -1,0 +1,8 @@
+:root {
+	height: 500vh;
+	background-color: rgb(173, 180, 133);
+}
+
+canvas {
+	image-rendering: pixelated;
+}
