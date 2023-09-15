@@ -15,7 +15,7 @@ export default function Home() {
 					<Link
 						href='/framer-motion-usescroll-3d'
 						className='inline-block border-2 border-gray-600 p-2 hover:underline'>
-						2. 3D and Scroll
+						2. Pixel Spinning Galaxies
 					</Link>
 				</li>
 			</ol>
