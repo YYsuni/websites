@@ -18,6 +18,11 @@ export default function Home() {
 						2. Pixel Spinning Galaxies
 					</Link>
 				</li>
+				<li>
+					<Link href='/glass-shapes' className='inline-block border-2 border-gray-600 p-2 hover:underline'>
+						3. Glass Shapes
+					</Link>
+				</li>
 			</ol>
 		</main>
 	)
