@@ -27,6 +27,11 @@ export default function Home() {
 						4. Gatsby Stars
 					</Link>
 				</li>
+				<li>
+					<Link href='/5.a-glass-of-water' className='inline-block border-2 border-gray-600 p-2 hover:underline'>
+						5. A Glass of Water
+					</Link>
+				</li>
 			</ol>
 		</main>
 	)
