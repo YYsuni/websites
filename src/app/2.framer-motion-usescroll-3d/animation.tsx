@@ -9,11 +9,13 @@ import { Vector3 } from 'three'
 
 export default function Animation() {
 	return (
-		<main className='fixed inset-0 flex items-center justify-center'>
-			<Canvas gl={{ antialias: false }}>
-				<Scene />
-			</Canvas>
-		</main>
+		<div style={{ backgroundColor: 'rgb(173, 180, 133)', height: '500vh' }}>
+			<main className='fixed inset-0 flex items-center justify-center'>
+				<Canvas gl={{ antialias: false }} style={{ imageRendering: 'pixelated' }}>
+					<Scene />
+				</Canvas>
+			</main>
+		</div>
 	)
 }
 
