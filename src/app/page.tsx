@@ -28,8 +28,8 @@ export default function Home() {
 					</Link>
 				</li>
 				<li>
-					<Link href='/5.a-glass-of-water' className='inline-block border-2 border-gray-600 p-2 hover:underline'>
-						5. A Glass of Water
+					<Link href='/5.a-glass-of-drink' className='inline-block border-2 border-gray-600 p-2 hover:underline'>
+						5. A Glass of Drink
 					</Link>
 				</li>
 			</ol>

@@ -1,49 +1,112 @@
 'use client'
 
-import { Canvas, useLoader } from '@react-three/fiber'
-import src_geom from './a glass of water.gltf'
+import { Canvas, useFrame, useLoader } from '@react-three/fiber'
+import src_gltf from './glass.gltf'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
-import { Environment, Lightformer, MeshTransmissionMaterial, OrbitControls } from '@react-three/drei'
+import { Environment, MeshTransmissionMaterial, OrbitControls, useHelper } from '@react-three/drei'
 import { useControls } from 'leva'
+import { useLayoutEffect, useRef } from 'react'
+import { HemisphereLightHelper, PointLightHelper, Vector3 } from 'three'
 
 export default function Main() {
-	const gltf = useLoader(GLTFLoader as any, src_geom)
+	return (
+		<main className='h-screen'>
+			<Canvas orthographic camera={{ position: [-10, 30, 100], near: 0.1, far: 1000, zoom: 60 }}>
+				<ambientLight intensity={5} />
+				<OrbitControls />
 
-	const config = useControls({
-		backside: false,
-		samples: { value: 20, min: 1, max: 32, step: 1 },
-		resolution: { value: 1024, min: 64, max: 2048, step: 64 },
-		transmission: { value: 0.95, min: 0, max: 1 },
-		roughness: { value: 0.01, min: 0, max: 1, step: 0.01 },
-		clearcoat: { value: 0.1, min: 0, max: 1, step: 0.01 },
-		clearcoatRoughness: { value: 0.15, min: 0, max: 1, step: 0.01 },
-		thickness: { value: 30, min: 0, max: 200, step: 0.01 },
-		backsideThickness: { value: 50, min: 0, max: 200, step: 0.01 },
-		ior: { value: 1, min: 1, max: 5, step: 0.01 },
-		chromaticAberration: { value: 0.1, min: 0, max: 1 },
-		anisotropy: { value: 1, min: 0, max: 10, step: 0.01 },
-		distortion: { value: 0, min: 0, max: 1, step: 0.01 },
-		distortionScale: { value: 0.1, min: 0.01, max: 1, step: 0.01 },
-		temporalDistortion: { value: 0.1, min: 0, max: 1, step: 0.01 },
-		attenuationDistance: { value: 0.5, min: 0, max: 10, step: 0.01 },
-		toneMapped: false,
-		renderOrder: 100
+				<Sence />
+				<Environment blur={1} preset='night' />
+			</Canvas>
+		</main>
+	)
+}
+
+function Sence() {
+	const gltf = useLoader(GLTFLoader as any, src_gltf)
+
+	const pointLight = useRef<any>()
+	const pointLight2 = useRef<any>()
+	const pointLight3 = useRef<any>()
+	const rectLight = useRef<any>()
+	const rectLight2 = useRef<any>()
+	// useHelper(pointLight3, PointLightHelper, 1)
+
+	// const config = useControls({
+	// transmission: { value: 1, min: 0, max: 1 },
+	// roughness: { value: 0, min: 0, max: 1, step: 0.01 },
+	// thickness: { value: 0.4, min: 0, max: 10, step: 0.01 }
+	// ior: { value: 1.3, min: 1, max: 5, step: 0.01 },
+	// chromaticAberration: { value: 0.1, min: 0, max: 1 },
+	// })
+
+	useLayoutEffect(() => {
+		rectLight.current?.lookAt(new Vector3(0, 0, 0))
+		rectLight2.current?.lookAt(new Vector3(-4, 0, 4))
 	})
 
 	return (
-		<main className='h-screen'>
-			<Canvas orthographic camera={{ position: [0, 5, 10], near: 0.1, far: 1000, zoom: 200 }}>
-				<color attach='background' args={['#DFDDF5']} />
-				<directionalLight castShadow intensity={1} position={[0, 20, 20]} />
-				<ambientLight />
-				<OrbitControls />
+		<>
+			<pointLight ref={pointLight} intensity={80} position={[0, -3, -5]} />
+			<pointLight ref={pointLight2} intensity={1000} position={[0, 5, -20]} />
+			<pointLight ref={pointLight3} intensity={2000} position={[5, 5, 7]} color='#f19132' />
 
-				<mesh geometry={gltf.nodes.glass.geometry} position={[0, -1, 0]}>
-					<MeshTransmissionMaterial {...config} />
+			<rectAreaLight ref={rectLight} intensity={200} position={[0, 30, -1]} />
+			<rectAreaLight ref={rectLight2} color='#93f' intensity={200} position={[-8, 3, 8]} />
+
+			<group position={[0, -5, 0]}>
+				<mesh geometry={gltf.nodes.glass.geometry}>
+					<meshPhysicalMaterial transmission={1} roughness={0} color='white' ior={1.3} thickness={0.4} />
+				</mesh>
+				<mesh geometry={gltf.nodes.liquid.geometry}>
+					<MeshTransmissionMaterial
+						attenuationDistance={10}
+						samples={20}
+						resolution={1024}
+						distortion={0}
+						distortionScale={0}
+						temporalDistortion={0}
+						transmission={0.99}
+						roughness={0}
+						color='#F19CEC'
+						ior={1.45}
+						thickness={0.45}
+						chromaticAberration={0.25}
+						anisotropy={1.3}
+					/>
+				</mesh>
+				<mesh geometry={gltf.nodes.floor.geometry}>
+					<meshLambertMaterial color='#1F28A4' />
 				</mesh>
 
-				{/* <Environment background blur={0} preset='apartment' /> */}
-			</Canvas>
-		</main>
+				<mesh geometry={gltf.nodes.ice.geometry}>
+					<meshPhysicalMaterial transmission={1} roughness={0} ior={1.4} thickness={0.3} />
+				</mesh>
+				<mesh geometry={gltf.nodes.ice2.geometry}>
+					<meshPhysicalMaterial transmission={1} roughness={0} ior={1.4} thickness={0.3} />
+				</mesh>
+
+				<mesh geometry={gltf.nodes.bubble.geometry}>
+					<meshPhysicalMaterial transmission={1} roughness={0} ior={1.1} />
+				</mesh>
+				<mesh geometry={gltf.nodes.bubble2.geometry}>
+					<meshPhysicalMaterial transmission={1} roughness={0} ior={1.1} />
+				</mesh>
+				<mesh geometry={gltf.nodes.bubble3.geometry}>
+					<meshPhysicalMaterial transmission={1} roughness={0} ior={1.1} />
+				</mesh>
+
+				<mesh geometry={gltf.nodes.straw.geometry}>
+					<meshPhysicalMaterial roughness={0.3} color='#54d2d4' clearcoat={0.2} />
+				</mesh>
+
+				<mesh geometry={gltf.nodes.ball.geometry}>
+					<meshLambertMaterial color='#E7A140' />
+				</mesh>
+				<mesh geometry={gltf.nodes.ball2.geometry}>
+					<meshLambertMaterial color='#E75A6B' />
+				</mesh>
+			</group>
+		</>
 	)
 }
