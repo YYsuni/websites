@@ -11,12 +11,12 @@ import { HemisphereLightHelper, PointLightHelper, Vector3 } from 'three'
 export default function Main() {
 	return (
 		<main className='h-screen'>
-			<Canvas orthographic camera={{ position: [-10, 30, 100], near: 0.1, far: 1000, zoom: 60 }}>
+			<Canvas orthographic camera={{ position: [-10, 20, 100], near: 0.1, far: 1000, zoom: 60 }}>
 				<ambientLight intensity={5} />
+				<ambientLight intensity={5} color='#fff' />
 				<OrbitControls />
 
 				<Sence />
-				<Environment blur={1} preset='night' />
 			</Canvas>
 		</main>
 	)
@@ -55,45 +55,86 @@ function Sence() {
 			<rectAreaLight ref={rectLight2} color='#93f' intensity={200} position={[-8, 3, 8]} />
 
 			<group position={[0, -5, 0]}>
-				<mesh geometry={gltf.nodes.glass.geometry}>
-					<meshPhysicalMaterial transmission={1} roughness={0} color='white' ior={1.3} thickness={0.4} />
+				<mesh geometry={gltf.nodes.floor.geometry}>
+					<meshLambertMaterial color='#1F28A4' />
 				</mesh>
-				<mesh geometry={gltf.nodes.liquid.geometry}>
+
+				<mesh geometry={gltf.nodes.glass.geometry}>
 					<MeshTransmissionMaterial
 						attenuationDistance={10}
 						samples={20}
-						resolution={1024}
+						resolution={1800}
 						distortion={0}
 						distortionScale={0}
 						temporalDistortion={0}
-						transmission={0.99}
-						roughness={0}
-						color='#F19CEC'
-						ior={1.45}
-						thickness={0.45}
-						chromaticAberration={0.25}
-						anisotropy={1.3}
+						roughness={0.1}
+						color='white'
+						ior={1.5}
+						thickness={0.4}
 					/>
 				</mesh>
-				<mesh geometry={gltf.nodes.floor.geometry}>
-					<meshLambertMaterial color='#1F28A4' />
+				<mesh geometry={gltf.nodes.liquid.geometry}>
+					<meshPhysicalMaterial transmission={1} roughness={0} color='#F19CEC' ior={1.3} thickness={0.45} />
 				</mesh>
 
 				<mesh geometry={gltf.nodes.ice.geometry}>
 					<meshPhysicalMaterial transmission={1} roughness={0} ior={1.4} thickness={0.3} />
 				</mesh>
 				<mesh geometry={gltf.nodes.ice2.geometry}>
-					<meshPhysicalMaterial transmission={1} roughness={0} ior={1.4} thickness={0.3} />
+					<MeshTransmissionMaterial
+						attenuationDistance={100}
+						samples={16}
+						resolution={1024}
+						distortion={0}
+						distortionScale={0}
+						temporalDistortion={0}
+						transmission={1}
+						roughness={0}
+						ior={1.1}
+					/>
 				</mesh>
 
 				<mesh geometry={gltf.nodes.bubble.geometry}>
-					<meshPhysicalMaterial transmission={1} roughness={0} ior={1.1} />
+					<MeshTransmissionMaterial
+						attenuationDistance={100}
+						samples={16}
+						resolution={1024}
+						distortion={0}
+						distortionScale={0}
+						temporalDistortion={0}
+						transmission={1}
+						roughness={0}
+						ior={1.1}
+						thickness={0.3}
+					/>
 				</mesh>
 				<mesh geometry={gltf.nodes.bubble2.geometry}>
-					<meshPhysicalMaterial transmission={1} roughness={0} ior={1.1} />
+					<MeshTransmissionMaterial
+						attenuationDistance={100}
+						samples={16}
+						resolution={1024}
+						distortion={0}
+						distortionScale={0}
+						temporalDistortion={0}
+						transmission={1}
+						roughness={0}
+						ior={1.1}
+						thickness={0.3}
+					/>
 				</mesh>
 				<mesh geometry={gltf.nodes.bubble3.geometry}>
-					<meshPhysicalMaterial transmission={1} roughness={0} ior={1.1} />
+					<MeshTransmissionMaterial
+						attenuationDistance={100}
+						samples={16}
+						resolution={1024}
+						distortion={0}
+						distortionScale={0}
+						temporalDistortion={0}
+						transmission={1}
+						roughness={0}
+						ior={1.1}
+						thickness={0.3}
+					/>
 				</mesh>
 
 				<mesh geometry={gltf.nodes.straw.geometry}>
