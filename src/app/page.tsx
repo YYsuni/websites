@@ -32,6 +32,11 @@ export default function Home() {
 						5. A Glass of Drink
 					</Link>
 				</li>
+				<li>
+					<Link href='/6.flowers' className='inline-block border-2 border-gray-600 p-2 hover:underline'>
+						6. Flowers
+					</Link>
+				</li>
 			</ol>
 		</main>
 	)
