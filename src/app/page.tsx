@@ -37,6 +37,11 @@ export default function Home() {
 						6. Flowers
 					</Link>
 				</li>
+				<li>
+					<Link href='/7.distorted-ball' className='inline-block border-2 border-gray-600 p-2 hover:underline'>
+						7. Distorted Ball
+					</Link>
+				</li>
 			</ol>
 		</main>
 	)
