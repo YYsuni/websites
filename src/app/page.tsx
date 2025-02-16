@@ -4,7 +4,7 @@ export default function Home() {
 	return (
 		<main className='flex h-screen flex-col items-center justify-center'>
 			<h1 className='border-text font-mono text-5xl font-bold'>WEBSITES</h1>
-			<ol className='mt-4 flex flex-wrap gap-4'>
+			<ol className='mt-4 flex flex-wrap gap-4 max-w-[600px]'>
 				<li>
 					<Link href='/1.next.js-cpu-animation' className='inline-block border-2 border-gray-600 p-2 hover:underline'>
 						1. CPU
@@ -40,6 +40,11 @@ export default function Home() {
 				<li>
 					<Link href='/7.distorted-ball' className='inline-block border-2 border-gray-600 p-2 hover:underline'>
 						7. Distorted Ball
+					</Link>
+				</li>
+				<li>
+					<Link href='/8.colorful-bg' className='inline-block border-2 border-gray-600 p-2 hover:underline'>
+						8. Colorful BG
 					</Link>
 				</li>
 			</ol>

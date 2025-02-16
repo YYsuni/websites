@@ -26,7 +26,7 @@ export default function Main() {
 function Sence() {
 	const gltf = useLoader(GLTFLoader as any, src_gltf)
 
-	const light = useRef<any>()
+	const light = useRef<any>(null)
 	useHelper(light, PointLightHelper, 0.5, 'green')
 
 	// const config = useControls({

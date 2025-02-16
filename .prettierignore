@@ -1,6 +1,12 @@
 dist/
 node_modules/
-package-lock.json
-pnpm-lock.yaml
-public
-.husky
+public/
+.next/
+
+**/.git
+**/.svn
+**/.hg
+**/node_modules
+**/package-lock.json
+**/pnpm-lock.json
+

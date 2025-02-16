@@ -1,4 +1,4 @@
-import './globals.css'
+import './globals.scss'
 
 interface Props {
 	children: React.ReactNode

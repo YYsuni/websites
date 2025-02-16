@@ -11,7 +11,7 @@ export default function Animation() {
 	return (
 		<div style={{ backgroundColor: 'rgb(173, 180, 133)', height: '500vh' }}>
 			<main className='fixed inset-0 flex items-center justify-center'>
-				<Canvas gl={{ antialias: false }} style={{ imageRendering: 'pixelated' }}>
+				<Canvas gl={{ antialias: false }} >
 					<Scene />
 				</Canvas>
 			</main>
@@ -32,7 +32,6 @@ function Scene() {
 		camera.lookAt(0, 0, 0)
 	})
 
-	useLayoutEffect(() => gl.setPixelRatio(0.2))
 
 	return (
 		<motion.group
@@ -63,7 +62,7 @@ function Star() {
 				Math.random() * degreesToRadians(360)
 			)}>
 			<octahedronGeometry args={[0.05, 0]} />
-			<meshBasicMaterial wireframe color='#222' />
+			<meshBasicMaterial  color='#222' />
 		</mesh>
 	)
 }

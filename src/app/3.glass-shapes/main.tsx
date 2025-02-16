@@ -11,7 +11,6 @@ import {
 	Lightformer,
 	MeshTransmissionMaterial,
 	OrbitControls,
-	PivotControls,
 	useHelper
 } from '@react-three/drei'
 import { useControls } from 'leva'
