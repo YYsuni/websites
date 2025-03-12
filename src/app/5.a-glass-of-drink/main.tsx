@@ -25,11 +25,11 @@ export default function Main() {
 function Sence() {
 	const gltf = useLoader(GLTFLoader as any, src_gltf)
 
-	const pointLight = useRef<any>()
-	const pointLight2 = useRef<any>()
-	const pointLight3 = useRef<any>()
-	const rectLight = useRef<any>()
-	const rectLight2 = useRef<any>()
+	const pointLight = useRef<any>(null)
+	const pointLight2 = useRef<any>(null)
+	const pointLight3 = useRef<any>(null)
+	const rectLight = useRef<any>(null)
+	const rectLight2 = useRef<any>(null)
 	// useHelper(pointLight3, PointLightHelper, 1)
 
 	// const config = useControls({
